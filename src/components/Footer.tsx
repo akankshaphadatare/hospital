@@ -10,14 +10,16 @@ const Footer = () => {
                 </div>
                 <div className="mt-4 md:mt-0">
                     <div className="flex flex-col md:flex-row space-y-2 md:space-x-6 md:space-y-0">
+                    <a href="#" className="text-white hover:underline">Home</a>
+                    <a href="#" className="text-white hover:underline">Services</a>
                         <a href="#" className="text-white hover:underline">About Us</a>
-                        <a href="#" className="text-white hover:underline">Home</a>
+                        
                         <a href="#" className="text-white hover:underline">Doctors</a>
-                        <a href="#" className="text-white hover:underline">Services</a>
-                        <a href="#" className="text-white hover:underline">Appointments</a>
-                        <a href="#" className="text-white hover:underline">Testimonials</a>
-                        <a href="#" className="text-white hover:underline">Gallery</a>
+                        
+                        
+                        
                         <a href="#" className="text-white hover:underline">Contact Us</a>
+                        <a href="#" className="text-white hover:underline">Sign in</a>
                     </div>
                 </div>
             </div>

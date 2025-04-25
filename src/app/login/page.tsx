@@ -4,69 +4,6 @@ import React from "react";
 import Link from "next/link"; // Import Link for navigation
 import Image from "next/image"; // Import Image for logo
 
-const Header = () => (
-  <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white">
-    <div className="flex items-center">
-      <Image
-        src="/l2.jpg" // Path to your logo image file
-        alt="Hospital Logo"
-        width={50}
-        height={50}
-        className="mr-2 logo-effect" // Add margin to the right for spacing
-      />
-      <div className="text-lg sm:text-xl font-bold hover:rainbow">Hospital</div>
-    </div>
-    <ul className="flex flex-wrap space-x-4 md:space-x-6">
-      <li>
-        <Link href="/" className="text-blue-800 hover:underline">Home</Link>
-      </li>
-      <li>
-        <Link href="/about" className="text-blue-800 hover:underline">About Us</Link>
-      </li>
-      <li>
-        <Link href="/services" className="text-blue-800 hover:underline">Services</Link>
-      </li>
-      <li>
-        <Link href="/contact" className="text-blue-800 hover:underline">Contact Us</Link>
-      </li>
-      <li>
-        <Link href="/doctors" className="text-blue-800 hover:underline">Doctors</Link>
-      </li>
-      <li>
-        <Link href="/gallery" className="text-blue-800 hover:underline">Sign In</Link>
-      </li>
-    </ul>
-  </nav>
-);
-
-const Footer = () => {
-  return (
-    <footer className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-300 text-white py-8">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
-        <div>
-          <h3 className="text-2xl font-bold">Smart Hospital</h3>
-          <p className="mt-2">"Smart Care for Smart Choices: Where Your Health Is Our Priority."</p>
-        </div>
-        <div className="mt-4 md:mt-0">
-          <div className="flex flex-col md:flex-row space-y-2 md:space-x-6 md:space-y-0">
-            <Link href="/about" className="text-white hover:underline">About Us</Link>
-            <Link href="/" className="text-white hover:underline">Home</Link>
-            <Link href="/docters" className="text-white hover:underline">docters</Link>
-            <Link href="/services" className="text-white hover:underline">Services</Link>
-            <Link href="/appointments" className="text-white hover:underline">Appointments</Link>
-            <Link href="/Sign In" className="text-white hover:underline">Sign In</Link>
-            <Link href="/contact" className="text-white hover:underline">Contact Us</Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="text-center mt-6">
-        <p className="text-white">© 2025 Smart Hospital. All Rights Reserved.</p>
-      </div>
-    </footer>
-  );
-};
-
 export default function BuyCoursePage() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent form submission
@@ -93,9 +30,6 @@ export default function BuyCoursePage() {
 
   return (
     <div className="min-h-screen flex flex-col"> {/* Removed bg-blue-100 */}
-      {/* Header Component */}
-      <Header />
-
       {/* Main Content */}
       <div className="flex flex-col md:flex-row items-center justify-center flex-1 p-4">
         {/* Left Image Section */}
@@ -181,9 +115,6 @@ export default function BuyCoursePage() {
           </button>
         </Link>
       </div>
-
-      {/* Footer Component */}
-      <Footer />
 
       {/* Custom Styles */}
       <style jsx>{`

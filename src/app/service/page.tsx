@@ -8,25 +8,26 @@ const services = [
     {
         image: "/c3.jpg",
         name: "Pediatric Services",
-        description: "Comprehensive pediatric care by specialized professionals. Pediatric services encompass the comprehensive medical care for infants, children, and adolescents, focusing on their physical, mental, and social well-being."
+        description: "Comprehensive pediatric care by specialized professionals.comprehensive healthcare provided for infants, children, and adolescents, focusing on their physical, mental, and emotional well-being"
     },
     {
         image: "/bg9.jpg",
         name: "Emergency Services",
-        description: "24/7 emergency services with state-of-the-art facilities. Hospital emergency services, like an Emergency Department (ED) or Emergency Room (ER), provide immediate medical attention for urgent and life-threatening conditions."
+        description: "24/7 emergency services with state-of-the-art facilities.Ruby Hall Clinic in Pune, and the emergency departments at various hospitals in Mumbai and other nearby cities."
     },
     {
         image: "/bg2.jpg",
         name: "Short-term hospitalization",
-        description: "Short-term hospitalization providing specialized care. Short-Term Acute Care (STAC) hospital is a type of in-hospital care designed for patients requiring brief hospitalization or observation, usually less than 48 hours."
+        description: "Short-term hospitalization providing specialized care.a type of hospital stay designed for patients who need brief inpatient care and can be discharged promptly once their clinical condition stabilizes"
     },
     {
         image: "/u3.jpg",
         name: "Routine Checkup",
-        description: "Regular medical examinations to maintain good health. A hospital routine checkup, also known as a full body checkup, is a comprehensive assessment of your overall health and well-being to detect potential health issues early on and monitor existing conditions."
+        description: "Regular medical examinations to maintain good health.typically involves a series of tests and assessments to evaluate overall health, often including blood work, urine analysis, and physical examination"
     }
 ];
 
+// Footer component with social media links and icons
 const Footer = () => {
     return (
         <footer className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-300 text-white py-8">
@@ -37,13 +38,13 @@ const Footer = () => {
                 </div>
                 <div className="mt-4 md:mt-0">
                     <div className="flex flex-col md:flex-row space-y-2 md:space-x-6 md:space-y-0">
-                        {["About Us", "Home", "Doctors", "Services", "Gallery", "Contact Us"].map((item, index) => (
+                        {["Home", "Services","About Us" , "Doctors",   "Contact Us","Sign In"].map((item, index) => (
                             <Link href="/" key={index} className="text-white hover:underline">{item}</Link>
                         ))}
                     </div>
                 </div>
             </div>
-            
+
             <div className="max-w-7xl mx-auto px-4 mt-4">
                 <div className="flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-4">
                     <input
@@ -51,13 +52,21 @@ const Footer = () => {
                         placeholder="Subscribe for updates"
                         className="p-2 rounded-l border border-gray-400 focus:outline-none w-full md:w-1/3"
                     />
-                    <button className="bg-black text-white p-2 rounded-r hover:bg-blue-500 mt-2 md:mt-0">Subscribe</button>
+                    <button className="bg- text-white p-2 rounded-r hover:bg-blue-500 mt-2 md:mt-0">Subscribe</button>
                 </div>
             </div>
 
             <div className="flex justify-center mt-6 space-x-4">
-                {["Instagram", "Facebook", "Twitter", "LinkedIn"].map((platform, index) => (
-                    <a key={index} href={`https://www.${platform.toLowerCase()}.com`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">{platform}</a>
+                {[
+                    { platform: "Instagram", icon: "fab fa-instagram" },
+                    { platform: "Facebook", icon: "fab fa-facebook" },
+                    { platform: "Twitter", icon: "fab fa-twitter" },
+                    { platform: "LinkedIn", icon: "fab fa-linkedin" }
+                ].map(({ platform, icon }, index) => (
+                    <a key={index} href={`https://www.${platform.toLowerCase()}.com`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 flex items-center">
+                        <i className={`${icon} mr-1`}></i> {/* Icon */}
+                        {platform}
+                    </a>
                 ))}
             </div>
 
@@ -68,6 +77,7 @@ const Footer = () => {
     );
 }
 
+// Main HospitalGallery component
 export default function HospitalGallery() {
     const [isVisible, setIsVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false); // State for mobile menu
@@ -98,26 +108,38 @@ export default function HospitalGallery() {
                     className="md:hidden text-blue-800 focus:outline-none"
                     aria-label="Toggle menu"
                 >
-                    <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
+                    {isOpen ? (
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    )}
                 </button>
                 <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}>
                     {[
                         { name: "Home", path: "/" },
                         { name: "Services", path: "/service" },
-                        { name: "Contact Us", path: "/contact" },
                         { name: "About Us", path: "/about_us" },
                         { name: "Doctors", path: "/docters" },
-                        { name: "Sign In", path: "/SIGN" }
+                        { name: "Contact Us", path: "/contact" },
+                        { name: "Sign In", path: "/lranmore" }
                     ].map((item) => (
-                        <li key={item.name} className="py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
+                        <li key={item.name} className="py-1 md:py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
                             <Link href={item.path} onClick={handleLinkClick}>
                                 <span className="text-blue-800">{item.name}</span>
                             </Link>
@@ -148,14 +170,6 @@ export default function HospitalGallery() {
                         </div>
                     </div>
                 ))}
-            </div>
-
-            <div className="flex justify-center mt-4">
-                <Link href="/">
-                    <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                        Back to Home
-                    </button>
-                </Link>
             </div>
 
             <Footer />

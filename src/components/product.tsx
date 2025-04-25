@@ -45,7 +45,7 @@ const ProductList = () => {
   return (
     <section className="py-16 px-4 md:px-6 bg-white">
       <h2 className="text-3xl font-bold text-center text-gray-800 welcome-text">Welcome to Smart Hospital</h2>
-      <div className="flex flex-wrap justify-center mt-8 max-w-[1200px] mx-auto">
+      <div className="flex flex-wrap justify-center mt-4 max-w-[1200px] mx-auto"> {/* Adjusted margin-top to mt-4 */}
         {products.map((product, index) => {
           let extraClasses = ""; // Variable to hold extra classes for specific products
 
@@ -74,7 +74,9 @@ const ProductList = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800">{product.title}</h3>
                   <p className="text-gray-600">{product.description}</p>
-                  <button className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-green-600 transition duration-200">Learn More</button>
+                  <a href="/lranmore" className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-green-600 transition duration-200">
+                    Learn More
+                  </a>
                 </div>
               </div>
             </div>

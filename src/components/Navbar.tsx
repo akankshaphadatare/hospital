@@ -43,26 +43,39 @@ export default function Navbar() {
                     className="md:hidden text-blue-800 focus:outline-none"
                     aria-label="Toggle menu"
                 >
-                    <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
+                    {/* Show menu icon or close icon based on isOpen state */}
+                    {isOpen ? (
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    )}
                 </button>
                 <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}>
                     {[
                         { name: "Home", path: "/" },
                         { name: "Services", path: "/service" },
-                        { name: "Contact Us", path: "/contact" },
                         { name: "About Us", path: "/about_us" },
                         { name: "Doctors", path: "/docters" },
-                        { name: "Sign In", path: "/SIGN" }
+                        { name: "Contact Us", path: "/contact" },
+                        { name: "Sign In", path: "/lranmore" }
                     ].map((item) => (
-                        <li key={item.name} className="py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
+                        <li key={item.name} className="py-0 px-4 hover:underline hover:rainbow text-center md:text-left"> {/* Changed py-2 to py-0 */}
                             <Link href={item.path} onClick={handleLinkClick}>
                                 <span className="text-blue-800">{item.name}</span>
                             </Link>
@@ -86,20 +99,18 @@ export default function Navbar() {
                     </h3>
 
                     <div className="flex flex-col md:flex-row items-center justify-center mt-4 gap-4">
-                    
-
-<div className="flex items-center bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 text-white rounded-lg p-3 shadow-md">
-    <Link href="/service" className="flex items-center w-full"> {/* Add Link component here */}
-        <Image 
-            src="/l2.jpg" 
-            alt="Hospital Icon" 
-            width={28} 
-            height={28} 
-            className="mr-2" 
-        />
-        <h2 className="text-sm md:text-base font-bold">Hospital Services</h2>
-    </Link>
-</div>
+                        <div className="flex items-center bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 text-white rounded-lg p-3 shadow-md">
+                            <Link href="/service" className="flex items-center w-full">
+                                <Image 
+                                    src="/l2.jpg" 
+                                    alt="Hospital Icon" 
+                                    width={28} 
+                                    height={28} 
+                                    className="mr-2" 
+                                />
+                                <h2 className="text-sm md:text-base font-bold">Hospital Services</h2>
+                            </Link>
+                        </div>
 
                         <Link
                             href="/bookappointment"
@@ -131,7 +142,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Right Content: Image */}
-                <div className="flex-1 flex items-center justify-center">  {/* Center Image Vertically and Horizontally */}
+                <div className="flex-1 flex items-center justify-center">
                     <Image
                         src="/hero32.jpg" // Replace with your image source
                         alt="Hospital"
@@ -224,7 +235,12 @@ export default function Navbar() {
                 .hover\\:rainbow:hover {
                     background-position: 100% 0;
                 }
+
+                ul {
+                    margin: 0; /* Ensure no margin for the ul */
+                    padding: 0; /* Ensure no padding for the ul */
+                }
             `}</style>
         </div>
-    );
+    );  
 }

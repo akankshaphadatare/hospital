@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer"; 
 
+// Doctor data array
 const doctors = [
     {
         name: "Dr. John Doe",
@@ -41,6 +42,18 @@ const doctors = [
         specialization: "General Practitioner",
         bio: "Dr. David Lee provides general medical services to patients.",
     },
+    {
+        name: "Dr. Pratiksha",
+        image: "/hero13.jpg",
+        specialization: "Surgeon",
+        bio: "Dr. Pratiksha provides expert surgical services.",
+    },
+    {
+        name: "Dr. Shhradha Vaishya",
+        image: "/hero12.jpg",
+        specialization: "Neurologist",
+        bio: "Dr. Shhradha provides thorough neurologic evaluations.",
+    },
 ];
 
 export default function Doctors() {
@@ -48,9 +61,7 @@ export default function Doctors() {
     const [loaded, setLoaded] = useState(false); 
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoaded(true);
-        }, 100); 
+        const timer = setTimeout(() => setLoaded(true), 100); 
         return () => clearTimeout(timer);
     }, []);
 
@@ -62,42 +73,40 @@ export default function Doctors() {
 
     return (
         <div className="relative min-h-screen w-full overflow-hidden text-black bg-gradient-to-b from-white to-[#cce7ff]">
-            <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white">
+            <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white"> {/* Increased padding */}
                 <div className="flex items-center">
                     <Image
                         src="/l2.jpg"
                         alt="Hospital Logo"
-                        width={50}
-                        height={50}
+                        width={60}
+                        height={60}
                         className="mr-2 logo-effect"
                     />
-                    <div className="text-lg sm:text-xl font-bold hover:rainbow">Hospital</div>
+                    <div className="text-lg sm:text-3xl font-bold hover:rainbow">Hospital</div> {/* Increased font size */}
                 </div>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="md:hidden text-blue-800 focus:outline-none"
                     aria-label="Toggle menu"
                 >
-                    <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
+                    {isOpen ? (
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    )}
                 </button>
-                <ul
-                    className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}
-                >
+                <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}>
                     {[
                         { name: "Home", path: "/" },
                         { name: "Services", path: "/service" },
-                        { name: "Contact Us", path: "/contact" },
                         { name: "About Us", path: "/about_us" },
                         { name: "Doctors", path: "/doctors" },
-                        { name: "Sign In", path: "/SIGN" }
+                        { name: "Contact Us", path: "/contact" },
+                        { name: "Sign In", path: "/lranmore" }
                     ].map((item) => (
                         <li key={item.name} className="py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
                             <Link href={item.path} onClick={handleLinkClick}>
@@ -109,11 +118,18 @@ export default function Doctors() {
             </nav>
 
             <div className="container mx-auto px-4 mt-4 relative z-10">
-                <h2 id="doctors" className="text-3xl font-bold mb-4 text-center text-black">Meet Our Doctors</h2>
+                <h2 id="doctors" className="text-2xl font-bold mb-4 text-center text-black">Meet Our Doctors</h2>
                 
+                {/* Info Section at the Top */}
+                <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+                    <p className="text-lg text-center text-black">
+                        Our team of dedicated medical professionals includes experts from various specializations who prioritize patient care. Each doctor brings a wealth of knowledge and experience, ensuring the highest standard of health services to meet your needs.
+                    </p>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {doctors.map((doctor, index) => (
-                        <div key={index} className={`flex flex-col items-center transform transition duration-300 hover:scale-105 p-4 bg-gray-100 rounded-lg ${loaded ? 'slide-in' : 'slide-out'}`}>
+                        <div key={index} className={`flex flex-col items-center transform transition duration-300 hover:scale-105 hover:translate-x-2 p-4 bg-gray-100 rounded-lg ${loaded ? 'slide-in' : 'slide-out'}`}>
                             <div className="relative rounded-lg overflow-hidden border-4 border-blue-600">
                                 <Image
                                     src={doctor.image}
@@ -129,19 +145,6 @@ export default function Doctors() {
                         </div>
                     ))}
                 </div>
-
-                <div className="flex justify-center mt-4">
-                    <Link href="/">
-                        <button className="bg-blue-600 text-white px-4 py-3 rounded mb-4 hover:bg-blue-700 transition">
-                            Back to Home
-                        </button>
-                    </Link>
-                </div>
-                
-                <p id="about" className="text-lg text-center text-black mt-4 px-4 sm:px-6 md:px-8 lg:px-16">
-                    <strong>Our dedicated team of doctors brings together expertise from various specialties, committed to providing the highest standard of patient care.</strong>
-                    Each doctor is passionate about their field and aims to ensure a comfortable and effective experience for every patient. <strong>Doctors, also known as physicians, are medical professionals who diagnose, treat, and prevent illnesses and injuries. They provide essential medical care, prescribe medications, perform surgeries, and offer preventative measures to help people maintain their health...</strong>
-                </p>
             </div>
 
             <Footer />
@@ -180,10 +183,6 @@ export default function Doctors() {
 
                 .slide-in {
                     animation: slide-in 0.5s forwards; 
-                }
-
-                .slide-out {
-                    opacity: 0; 
                 }
             `}</style>
         </div>

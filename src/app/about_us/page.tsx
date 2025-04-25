@@ -1,253 +1,242 @@
-"use client"
-import Image from 'next/image';
+"use client";
+
 import Link from 'next/link';
-import { useState } from 'react';
+import Image from 'next/image'; 
+import { useEffect, useState } from 'react';
+import Footer from "@/components/Footer"; 
 
-// Sample hospital data
-const hospitals = [
-    {
-        name: "Apollo Hospital - Main Entrance",
-        image: "/ap7.jpg",
-        history: "Apollo Hospital has been serving the community since 1990, equipped with state-of-the-art facilities and a commitment to excellence."
-    },
-    {
-        name: "Apollo Hospital - Treatment Room",
-        image: "/ap8.jpg",
-        history: "Our treatment rooms are designed to provide the highest level of care, blending comfort and technology."
-    },
-    {
-        name: "Apollo Hospital - Emergency Services",
-        image: "/ap9.jpg",
-        history: "The emergency department operates 24/7, ensuring rapid response and quality care during critical times."
-    },
-    {
-        name: "Apollo Hospital - Patient Recovery Area",
-        image: "/ap10.jpg",
-        history: "We prioritize patient comfort and well-being in our recovery areas, helping patients recuperate in peace."
-    },
-    {
-        name: "Apollo Hospital - Surgical Suite",
-        image: "/ap11.jpg",
-        history: "Our surgical suites are equipped with cutting-edge technology to assist our skilled surgeons."
-    },
-    {
-        name: "Apollo Hospital - Radiology Department",
-        image: "/ap12.jpg",
-        history: "Utilizing the latest imaging technologies, our radiology department provides accurate diagnoses and treatment plans."
-    },
-];
+const AboutUs = () => {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-// Footer Component
-const Footer = () => {
-    return (
-        <footer className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-300 text-white py-8">
-            <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
-                <div>
-                    <h3 className="text-2xl font-bold">Smart Hospital</h3>
-                    <p className="text-white mt-2">"Smart Care for Smart Choices: Where Your Health Is Our Priority."</p>
-                </div>
-                <div className="mt-4 md:mt-0">
-                    <div className="flex flex-col md:flex-row space-y-2 md:space-x-6 md:space-y-0">
-                        <a href="/about_us" className="text-white hover:underline">About Us</a>
-                        <a href="/" className="text-white hover:underline">Home</a>
-                        <a href="/docters" className="text-white hover:underline">Doctors</a>
-                        <a href="/service" className="text-white hover:underline">Services</a>
-                        <a href="/SIGN" className="text-white hover:underline">Sign In</a>
-                        <a href="/contact" className="text-white hover:underline">Contact Us</a>
-                    </div>
-                </div>
-            </div>
+  useEffect(() => {
+    const elements = document.querySelectorAll('.animate');
+    elements.forEach((el) => {
+      setTimeout(() => {
+        el.classList.add('animate-on');
+      }, 100); // Adjust delay as needed
+    });
+  }, []);
 
-            <div className="max-w-7xl mx-auto px-6 mt-4">
-                <div className="flex flex-col md:flex-row items-center justify-center space-x-0 md:space-x-4">
-                    <input
-                        type="email"
-                        placeholder="Subscribe for updates"
-                        className="p-2 rounded-l border border-gray-400 focus:outline-none w-full md:w-1/3"
-                    />
-                    <button className="bg-black-600 text-white p-2 rounded-r hover:bg-blue-500 mt-2 md:mt-0">Subscribe</button>
-                </div>
-            </div>
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
 
-            <div className="flex justify-center mt-6 space-x-4">
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                    {/* SVG for Instagram */}
-                </a>
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                    {/* SVG for Facebook */}
-                </a>
-                <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                    {/* SVG for Twitter */}
-                </a>
-                <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300">
-                    {/* SVG for LinkedIn */}
-                </a>
-            </div>
+  return (
+    <div className="relative min-h-screen w-full overflow-hidden text-black bg-gradient-to-b from-white to-[#cce7ff]">
+      <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white">
+        <div className="flex items-center">
+          <Image
+            src="/l2.jpg"
+            alt="Hospital Logo"
+            width={50}
+            height={50}
+            className="mr-2 logo-effect"
+          />
+          <div className="text-lg sm:text-xl font-bold hover:rainbow">Hospital</div>
+        </div>
+        <button
+          onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-blue-800 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? (
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          )}
+        </button>
+        <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isMobileMenuOpen ? "top-16" : "top-[-490px]"}`}>
+          {[
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/service" },
+            { name: "About Us", path: "/about_us" },
+            { name: "Doctors", path: "/docters" },
+            { name: "Contact Us", path: "/contact" },
+            { name: "Sign In", path: "/lranmore" }
+          ].map((item) => (
+            <li key={item.name} className="py-1 md:py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
+              <Link href={item.path} onClick={handleLinkClick}>
+                <span className="text-blue-800">{item.name}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-            <div className="text-center mt-6">
-                <p className="text-white">© 2025 Smart Hospital. All Rights Reserved.</p>
-            </div>
-        </footer>
-    );
+      {/* Background Image Section with Sliding Jump Effect */}
+      <div className="relative w-full h-64 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center animate slide-in-jump" style={{ backgroundImage: "url('/ap10.jpg')" }}>
+          <div className="flex items-center justify-center h-full bg-opacity-50">
+            <h1 className="text-3xl md:text-5xl text-black font-bold animate-on">About Us</h1>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 relative z-20">
+        <div className="flex flex-col md:flex-row">
+          <div className="md:w-2/3 relative mb-8 md:mb-0 animate slide-in-left-jump">
+            {/* Add any content here */}
+          </div>
+        </div>
+
+        {/* Our Mission Section with Images */}
+        <div className="mt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="md:w-1/3 md:pr-4 mb-4 md:mb-0 animate slide-in-left-jump">
+            <img
+              src="/hos2.jpg"
+              alt="Mission Image Left"
+              className="w-full h-auto rounded-lg shadow-lg animate image-border"
+            />
+          </div>
+          <div className="md:w-1/3 text-center mb-4 md:mb-0 animate slide-in-up">
+            <h2 className="text-xl md:text-2xl font-bold animate mb-4">Our Mission</h2>
+            <p className="text-base md:text-lg animate mb-4">
+              Our mission at Smart Hospital is to provide compassionate, patient-centered care, ensuring that every individual receives the highest quality medical services. We strive to create a safe and supportive environment, focusing on community health improvement and educating our patients about their health.
+            </p>
+          </div>
+          <div className="md:w-1/3 md:pl-4 mb-4 md:mb-0 animate slide-in-right-jump">
+            <img
+              src="/hos4.jpg"
+              alt="Mission Image Right"
+              className="w-full h-auto rounded-lg shadow-lg animate image-border"
+            />
+          </div>
+        </div>
+
+        {/* Patient Reviews Section */}
+        <div className="mt-8">
+          <h2 className="text-xl md:text-2xl font-bold animate mb-4">Patient Reviews</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { review: "Exceptional care from all the staff. Feeling better already!", name: "John Doe", rating: "⭐⭐⭐⭐⭐" },
+              { review: "Clean, modern facilities. Very comfortable and professional!", name: "Jane Smith", rating: "⭐⭐⭐⭐" },
+              { review: "The doctors were attentive and took the time to answer all my questions. I felt very cared for!", name: "Emily Johnson", rating: "⭐⭐⭐⭐⭐" },
+              { review: "I appreciated the quick service and the professionalism of the staff. Highly recommend!", name: "Robert Brown", rating: "⭐⭐⭐⭐" }
+            ].map((item, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-md review-card animate slide-in-up">
+                <p className="text-base md:text-lg">"{item.review}"</p>
+                <p className="text-sm font-semibold">- {item.name}</p>
+                <div className="mt-2 text-yellow-500">{item.rating}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <Footer />
+
+      <style jsx>{`
+        .animate {
+          opacity: 0;
+          animation: animate-in 0.5s ease-in-out forwards;
+        }
+        .animate-on {
+          opacity: 1;
+        }
+        @keyframes animate-in {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+
+        /* Adjusted Background Jumping Sliding effects */
+        .slide-in-jump {
+          animation: slide-in-jump 0.5s ease forwards;
+        }
+
+        @keyframes slide-in-jump {
+          0% {
+            opacity: 0;
+            transform: translateY(20px); /* Start below */
+          }
+          60% {
+            transform: translateY(-15px); /* Jump up */
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0); /* Slide to final position */
+          }
+        }
+
+        /* Jumping Sliding effects */
+        .slide-in-left-jump {
+          animation: slide-in-left-jump 0.5s ease forwards;
+        }
+        .slide-in-right-jump {
+          animation: slide-in-right-jump 0.5s ease forwards;
+        }
+
+        @keyframes slide-in-left-jump {
+          0% {
+            opacity: 0;
+            transform: translateX(-50px) translateY(20px);
+          }
+          60% {
+            transform: translateX(10px) translateY(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+          }
+        }
+
+        @keyframes slide-in-right-jump {
+          0% {
+            opacity: 0;
+            transform: translateX(50px) translateY(20px);
+          }
+          60% {
+            transform: translateX(-10px) translateY(-10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+          }
+        }
+
+        /* Styles for the image border effect */
+        .image-border {
+          border: 4px solid blue;
+          transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; 
+          margin-bottom: 20px; 
+        }
+        .image-border:hover {
+          transform: scale(1.05); 
+          border-color: darkblue; 
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+        }
+
+        /* Styles for Review Cards Hover Effect */
+        .review-card {
+          transition: transform 0.3s, box-shadow 0.3s; 
+        }
+        .review-card:hover {
+          transform: scale(1.02); 
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+        }
+      `}</style>
+    </div>
+  );
 };
 
-// Main Component
-export default function HospitalInfo() {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const handleLinkClick = () => {
-        setIsOpen(false);
-    };
-
-    return (
-       <div className="relative min-h-screen w-full overflow-hidden text-black bg-gradient-to-b from-white to-[#cce7ff]">
-                   {/* Horizontal Scrolling Effect */}
-                   <div className="horizontal-scroll-background" />
-       
-                   {/* Navbar */}
-                   <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white">
-                       <div className="flex items-center">
-                           <Image
-                               src="/l2.jpg"
-                               alt="Hospital Logo"
-                               width={50}
-                               height={50}
-                               className="mr-2 logo-effect"
-                           />
-                           <div className="text-lg sm:text-xl font-bold hover:rainbow">Hospital</div>
-                       </div>
-                       <button
-                           onClick={() => setIsOpen(!isOpen)}
-                           className="md:hidden text-blue-800 focus:outline-none"
-                           aria-label="Toggle menu"
-                       >
-                           <svg
-                               className="w-6 h-6"
-                               fill="none"
-                               stroke="currentColor"
-                               viewBox="0 0 24 24"
-                               xmlns="http://www.w3.org/2000/svg"
-                           >
-                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                           </svg>
-                       </button>
-                       <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}>
-                           {[
-                               { name: "Home", path: "/" },
-                               { name: "Services", path: "/service" },
-                               { name: "Contact Us", path: "/contact" },
-                               { name: "About Us", path: "/about_us" },
-                               { name: "Doctors", path: "/docters" },
-                               { name: "Sign In", path: "/SIGN" }
-                           ].map((item) => (
-                               <li key={item.name} className="py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
-                                   <Link href={item.path} onClick={handleLinkClick}>
-                                       <span className="text-blue-800">{item.name}</span>
-                                   </Link>
-                               </li>
-                           ))}
-                       </ul>
-                   </nav>
-
-            <div className="container mx-auto px-4 mt-2 relative z-10">
-                <h2 id="hospitals" className="text-3xl font-bold mb-6 text-center text-blue-800 animate-fadeIn">Explore Our Hospital</h2>
-
-                {/* Hospital Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {hospitals.map((hospital, index) => (
-                        <div 
-                            key={index} 
-                            className={`flex flex-col items-center bg-white text-black rounded-lg shadow-lg p-4 animate-slideIn transition-transform duration-300 hover:scale-105 hover:shadow-xl`}
-                        >
-                            <div className="overflow-hidden relative w-full mb-2 rounded-lg">
-                                <div className="border-4 border-transparent rainbow-border">
-                                    <div className="inset-0 rounded-lg bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 animate-rainbow absolute inset-0"></div>
-                                    <Image
-                                        src={hospital.image}
-                                        alt={hospital.name}
-                                        width={300}
-                                        height={200}
-                                        className="rounded-lg w-full h-48 object-cover relative z-10"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            </div>
-                            <h3 className="text-lg font-semibold text-center">{hospital.name}</h3>
-                            <p className="text-sm text-center mt-2">{hospital.history}</p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* About Paragraph */}
-                <p id="about" className="text-lg text-center text-blue-800 mt-8 px-4 sm:px-6 md:px-8 lg:px-16 animate-fadeIn">
-                    <strong>Our commitment to patient care spans over three decades, with a focus on excellence, innovation, and compassion.</strong>
-                    We aim to create a supportive environment for our patients while maintaining the highest standards of healthcare.
-                    <strong> At Apollo Hospital, you can expect world-class services equipped with the latest technology and a dedicated team of professionals.</strong>
-                </p>
-            </div>
-
-            {/* Back Button at the Bottom */}
-            <div className="flex justify-center mb-4 z-20 relative">
-                <Link href="/">
-                    <button className="relative bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition transform hover:scale-105 hover:shadow-lg">
-                        <span>Back to Home</span>
-                        <span className="absolute inset-0 rounded-md bg-blue-700 transition-transform duration-300 scale-0 hover:scale-100"></span>
-                    </button>
-                </Link>
-            </div>
-
-            {/* Footer Section */}
-            <Footer />
-
-            <style jsx>{`
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-
-                @keyframes slideIn {
-                    from {
-                        transform: translateY(20px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateY(0);
-                        opacity: 1;
-                    }
-                }
-
-                @keyframes rainbowAnimation {
-                    0% { background-position: 0%; }
-                    100% { background-position: 100%; }
-                }
-
-                .animate-fadeIn {
-                    animation: fadeIn 0.5s forwards;
-                }
-
-                .animate-slideIn {
-                    animation: slideIn 0.5s forwards;
-                }
-
-                .animate-rainbow {
-                    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-                    background-size: 400%;
-                    animation: rainbowAnimation 5s linear infinite; /* Adjust duration for speed of animation */
-                }
-
-                /* Rainbow border styles */
-                .rainbow-border {
-                    position: relative;
-                    overflow: hidden;
-                    border-width: 4px;
-                    border-style: solid;
-                    border-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet) 1;
-                }
-            `}</style>
-        </div>
-    );
-}
+export default AboutUs;

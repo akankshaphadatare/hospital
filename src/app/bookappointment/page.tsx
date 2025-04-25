@@ -103,7 +103,7 @@ const Footer = () => {
 export default function BookAppointment() {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
-    const [isOpen, setIsOpen] = useState(true); // Start with the menu open
+    const [isOpen, setIsOpen] = useState(false); // Start with the menu closed
     const [isVisible, setIsVisible] = useState(false); // State for slide animation
 
     // Debounce the search term
@@ -132,53 +132,66 @@ export default function BookAppointment() {
 
     return (
         <div className="relative min-h-screen w-full overflow-hidden text-black bg-gradient-to-b from-white to-[#cce7ff]">
-                    {/* Horizontal Scrolling Effect */}
-                    <div className="horizontal-scroll-background" />
-        
-                    {/* Navbar */}
-                    <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white">
-                        <div className="flex items-center">
-                            <Image
-                                src="/l2.jpg"
-                                alt="Hospital Logo"
-                                width={50}
-                                height={50}
-                                className="mr-2 logo-effect"
-                            />
-                            <div className="text-lg sm:text-xl font-bold hover:rainbow">Hospital</div>
-                        </div>
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="md:hidden text-blue-800 focus:outline-none"
-                            aria-label="Toggle menu"
+            {/* Horizontal Scrolling Effect */}
+            <div className="horizontal-scroll-background" />
+
+            {/* Navbar */}
+            <nav className="flex flex-wrap justify-between items-center p-4 shadow-md z-10 bg-white">
+                <div className="flex items-center">
+                    <Image
+                        src="/l2.jpg"
+                        alt="Hospital Logo"
+                        width={50}
+                        height={50}
+                        className="mr-2 logo-effect"
+                    />
+                    <div className="text-lg sm:text-xl font-bold hover:rainbow">Hospital</div>
+                </div>
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="md:hidden text-blue-800 focus:outline-none"
+                    aria-label="Toggle menu"
+                >
+                    {/* Show menu icon or close icon based on isOpen state */}
+                    {isOpen ? (
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
                         >
-                            <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                            </svg>
-                        </button>
-                        <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}>
-                            {[
-                                { name: "Home", path: "/" },
-                                { name: "Services", path: "/service" },
-                                { name: "Contact Us", path: "/contact" },
-                                { name: "About Us", path: "/about_us" },
-                                { name: "Doctors", path: "/docters" },
-                                { name: "Sign In", path: "/SIGN" }
-                            ].map((item) => (
-                                <li key={item.name} className="py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
-                                    <Link href={item.path} onClick={handleLinkClick}>
-                                        <span className="text-blue-800">{item.name}</span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </nav>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    )}
+                </button>
+                <ul className={`absolute md:flex md:space-x-6 bg-white md:static right-0 w-full md:w-auto transition-transform duration-300 ease-in-out z-20 ${isOpen ? "top-16" : "top-[-490px]"}`}>
+                    {[
+                        { name: "Home", path: "/" },
+                        { name: "Services", path: "/service" },
+                        { name: "Contact Us", path: "/contact" },
+                        { name: "About Us", path: "/about_us" },
+                        { name: "Doctors", path: "/docters" },
+                        { name: "Sign In", path: "/lranmore" }
+                    ].map((item) => (
+                        <li key={item.name} className="py-2 px-4 hover:underline hover:rainbow text-center md:text-left">
+                            <Link href={item.path} onClick={handleLinkClick}>
+                                <span className="text-blue-800">{item.name}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
 
             <div className="container mx-auto p-4 md:p-8 flex flex-col items-center">
                 <Link href="/">
